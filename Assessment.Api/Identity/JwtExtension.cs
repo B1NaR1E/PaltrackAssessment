@@ -1,0 +1,33 @@
+﻿using Microsoft.IdentityModel.Tokens;
+
+namespace Assessment.Api.Identity;
+
+public static class JwtExtension
+{
+    public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        if (configuration is null)
+            throw new ArgumentNullException(nameof(configuration));
+
+        var authority = configuration.GetValue<string>($"{TokenIssuerConfig.SectionName}:Authority")
+                        ?? throw new Exception($"{TokenIssuerConfig.SectionName}:Authority section was not found.");
+
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.Authority = authority;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false
+                };
+            });
+
+        return services;
+    }
+}

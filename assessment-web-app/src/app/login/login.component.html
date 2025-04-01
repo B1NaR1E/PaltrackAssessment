@@ -1,0 +1,30 @@
+<div id="container" [formGroup]="form">
+    <h1>Login</h1>
+
+    @if(username?.invalid && (username?.dirty || username?.touched))
+    {
+        <span>Username is not a valid email.</span>
+    }
+    <input type="text" formControlName="username" placeholder="Username" />
+
+    @if (password?.invalid && (password?.dirty || password?.touched)) {
+      <div *ngIf="!password?.value?.match('^(?=.*[A-Z])')">
+        <span class="block">At least one uppercase letter.</span><br/>
+      </div>
+      <div *ngIf="!password?.value?.match('(?=.*[a-z])')">
+        <span class="block">At least one lowercase letter.</span><br/>
+      </div>
+      <div *ngIf="!password?.value?.match('(.*[0-9].*)')">
+        <span class="block">At least one digit.</span><br/>
+      </div>
+      <div *ngIf="!password?.value?.match('(?=.*[!@#$%^&*])')">
+        <span class="block">At least one special character.</span><br/>
+      </div>
+      <div *ngIf="!password?.value?.match('.{6,}')">
+        <span class="block">At least 6 characters long.</span><br/>
+      </div>
+    }
+    <input type="password" formControlName="password" placeholder="Password" />
+
+    <button type="submit" (click)="login()" [disabled]="!form.valid">Login</button>
+</div>

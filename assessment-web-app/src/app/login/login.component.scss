@@ -1,0 +1,44 @@
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+
+  h1{
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  input{
+    background-color: #CCC;
+    color: #555;
+    padding: 10px 20px;
+    border: 0;
+    margin-bottom: 10px;
+    width: 200px;
+  }
+
+  button {
+    width: 240px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #364bd2;
+    color: #fff;
+    border: 0;
+    outline: none;
+    margin-top: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &[disabled] {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  span{
+    color: #e60c0c;
+  }
+}

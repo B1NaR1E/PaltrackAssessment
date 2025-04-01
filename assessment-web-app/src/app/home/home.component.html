@@ -1,0 +1,13 @@
+<dx-data-grid
+  [dataSource]="customers"
+  keyExpr="id"
+  [allowColumnReordering]="true"
+  [showBorders]="true">
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxi-column dataField="name"></dxi-column>
+  <dxi-column dataField="phone"></dxi-column>
+  <dxi-column dataField="email"></dxi-column>
+  <dxi-column dataField="postalZip"></dxi-column>
+  <dxi-column dataField="region"></dxi-column>
+  <dxi-column dataField="country" [groupIndex]="0"></dxi-column>
+</dx-data-grid>
